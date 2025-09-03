@@ -1,0 +1,7 @@
+## LAB 10
+
+# List and zipmap
+
+Here we use list type variables to create multiple vnets with different name and different address space without overlaping.
+
+We use here list(string) and to able to use we have to tranform this list to map type with *zipmap*
