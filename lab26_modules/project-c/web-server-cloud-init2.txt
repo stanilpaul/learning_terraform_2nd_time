@@ -1,0 +1,21 @@
+#cloud-config
+package_upgrade: false
+packages:
+  - apache2
+write_files:
+  - owner: root:root
+    path: /var/www/html/index.html
+    content: |
+      <!DOCTYPE html>
+      <html>
+        <body style="background-color:rgba(255, 151, 215, 1);">
+          <h1>Welcome This is VM2</h1>
+          <p>Terraform Remote state network and vm deployment demo</p>
+        </body>
+      </html>
+runcmd:
+  - sudo systemctl start apache2
+  - sudo systemctl enable apache2
+  - sudo ufw allow 80/tcp || true
+  - sudo ufw disable || true
+  - sudo curl -H "Metadata:true" --noproxy "*" "http://169.254.169.254/metadata/instance?api-version=2020-09-01" -o /var/www/html/metadata.html
